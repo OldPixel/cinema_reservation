@@ -6,6 +6,6 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://mysql-345112.vipserv.org:3306/tomash_reserv</property>
     <property name="hibernate.connection.username">tomash_reserv</property>
-    <property name="hibernate.connection.password">pixtom88</property>
+    <property name="hibernate.connection.password">haslo</property>
   </session-factory>
 </hibernate-configuration>
