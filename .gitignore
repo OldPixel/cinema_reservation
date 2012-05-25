@@ -1,3 +1,4 @@
 nbproject/
 build/
 build.xml
+src/java/hibernate.cfg.xml
