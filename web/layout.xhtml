@@ -24,6 +24,9 @@
                 <ui:insert name="left">Menu</ui:insert>
             </div>
             <div id="content" class="left_content">
+                <ui:repeat value="#{ReservationBean.all}" var="reserv">
+                    <p>#{reserv.place}</p>
+                </ui:repeat>
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>

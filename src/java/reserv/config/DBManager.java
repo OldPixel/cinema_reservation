@@ -25,7 +25,7 @@ public class DBManager {
 
   public EntityManagerFactory createEntityManagerFactory(){
     if(emf == null)
-      emf = Persistence.createEntityManagerFactory("CinemaReservationPU");
+      emf = Persistence.createEntityManagerFactory("cinema_reservationPU");
     return emf;
   }
 

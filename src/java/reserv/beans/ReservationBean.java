@@ -4,17 +4,20 @@
  */
 package reserv.beans;
 
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.EntityManager;
+import reserv.config.DBManager;
 import reserv.entity.Reservation;
 
 /**
  *
  * @author muody
  */
-@ManagedBean
+@ManagedBean(name="ReservationBean")
 @RequestScoped
-public class ReservationBeans {
+public class ReservationBean {
 
     private Reservation reservation = new Reservation();
 
@@ -28,7 +31,14 @@ public class ReservationBeans {
     /**
      * Creates a new instance of ReservationBeans
      */
-    public ReservationBeans() {
+    public ReservationBean() {
+    }
+    
+    public List<Reservation> getAll(){
+        EntityManager em = DBManager.getManager().createEntityManager();
+        List list = em.createNamedQuery("Reservation.findAll").getResultList();
+        em.close();
+        return list;
     }
     
 }
