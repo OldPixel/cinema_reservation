@@ -11,8 +11,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
+import org.hibernate.exception.ConstraintViolationException;
 import reserv.config.DBManager;
+import reserv.entity.Movie;
 import reserv.entity.Reservation;
+import reserv.entity.Seance;
 import reserv.objects.Place;
 
 
@@ -113,6 +116,53 @@ public class ReservationBean {
             placesList.add(p);
         }
         return placesList;
+    }
+    
+    public String create()
+    {
+        
+        System.out.println("Tutaj");
+        
+        EntityManager em = DBManager.getManager().createEntityManager();
+        em.getTransaction().begin();
+        try{
+            reservation.setId(null);
+            reservation.setFirstName("asda");
+            reservation.setLastName("asdaasd");
+            reservation.setPhoneNumber("1235641");
+            reservation.setPlace(Integer.parseInt(placeNumber));
+            List<Seance> s = em.createNamedQuery("Seance.findById").setParameter("id", seanceId).getResultList();
+
+            System.out.print("Ilość elementów");
+            System.out.println(s.size());
+            Seance s2 = new Seance();
+            if (!s.isEmpty())
+                s2 = s.get(0);
+
+            reservation.setSeance(s2);
+            System.out.print(placeNumber);
+            em.persist(reservation);
+            em.getTransaction().commit();    
+            em.close();
+
+            this.reservation = new Reservation();
+           
+        }
+        catch(javax.validation.ConstraintViolationException e)
+        {
+            System.out.println("WYJATEK !!!!!");
+            System.out.println(e.getConstraintViolations().toString());
+            
+        }
+        
+        
+        
+        
+        
+        
+        return "reservations";
+        
+        
     }
     
 }
