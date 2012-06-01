@@ -30,17 +30,7 @@ public class ReservationBean {
 
     private String placeNumber;
     private Integer seanceId;
-    private Boolean isLogged;
     
-   
-
-    public Boolean getIsLogged() {
-        return isLogged;
-    }
-
-    public void setIsLogged(Boolean isLogged) {
-        //
-    }
 
     public String getPlaceNumber() {
         return placeNumber;
