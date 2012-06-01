@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./layout.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <ui:define name="content">
+        <h:outputText value="#{ReservationBean.checkStep()}"></h:outputText>
+        <h:form prependId="false">
+            <h3>Dane</h3>
+            <h:messages id="messageList" />
+            <table>
+                <tr>
+                    <td>Imię: </td>
+                    <td><h:inputText id="firstName" value="#{ReservationBean.reservation.firstName}" required="true" requiredMessage="Pole imię jest wymagane"  >
+                            <f:validateLength minimum="2" maximum="50"></f:validateLength>
+                            <h:message for="firstName" showSummary="true"/>
+                        </h:inputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nazwisko: </td>
+                    <td><h:inputText id="lastname" value="#{ReservationBean.reservation.lastName}" required="true" requiredMessage="Pole nazwisko jest wymagane" ></h:inputText> </td>
+                </tr>
+                <tr>
+                    <td>Telefon: </td>
+                    <td><h:inputText id="phone" value="#{ReservationBean.reservation.phoneNumber}" required="true" requiredMessage="Numer telefonu jest wymagany" >
+                            
+                        </h:inputText> </td>
+                </tr>
+                <tr>
+                    <td><h:commandButton action="#{ReservationBean.create()}" value="Rezerwuj"></h:commandButton> </td>
+                </tr>
+            </table>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

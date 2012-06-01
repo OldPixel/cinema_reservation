@@ -13,30 +13,22 @@
     <body>
         <f:view>
         <ui:composition template="./layout.xhtml">
-
-
             <ui:define name="content">
-                
+                 <h:outputText value="#{ReservationBean.checkStep()}"></h:outputText>
+                <h:outputText value="#{ReservationBean.info}"></h:outputText>
                 <ui:repeat value="#{ReservationBean.getSeancePlaces()}" var="p">                    
-                <h:form>
-
-                    
+                <h:form> 
                     <h:commandButton rendered="#{p.reservedPlace == false}" class="place" value="#{p.reservation.place}" actionListener="#{ReservationBean.setPlaceNumber}"
-                                     action="#{ReservationBean.create()}">
+                                     action="orderInformation">
                         <f:attribute name="name" value="#{p.reservation.place.toString()}" />
                     </h:commandButton>
                     <h:commandButton rendered="#{p.reservedPlace == true}" class="place_reserved" value="#{p.reservation.place}"
                                      disabled="true" action="reservations">     
                         
                     </h:commandButton>
-                    
-                
                 </h:form>
                 </ui:repeat>
-                
             </ui:define>
-            
-
         </ui:composition>
     </f:view>
     </body>

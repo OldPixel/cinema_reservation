@@ -139,3 +139,7 @@
     width: 64px;
     float: left;  
 }
+
+#messageList{
+    color: red;
+}

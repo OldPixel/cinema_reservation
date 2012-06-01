@@ -57,9 +57,14 @@ public class Seance implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public String getSeanceDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        return formatter.format(seanceDate);
+    }
+
+    public String getSeanceDate(String format) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
         return formatter.format(seanceDate);
     }
 

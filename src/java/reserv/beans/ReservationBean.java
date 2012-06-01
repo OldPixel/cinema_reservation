@@ -4,11 +4,15 @@
  */
 package reserv.beans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import reserv.config.DBManager;
@@ -32,6 +36,18 @@ public class ReservationBean {
 
     private String placeNumber;
     private Integer seanceId;
+    
+    public String checkStep(){
+        if(seanceId <= 0){
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("seances.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(ReservationBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return "";
+    }
+    
 
     public String getPlaceNumber() {
         return placeNumber;
@@ -67,6 +83,9 @@ public class ReservationBean {
      * Creates a new instance of ReservationBeans
      */
     public ReservationBean() {
+        seanceId = -1;
+        placeNumber = "";
+        
     }
     
     public List<Reservation> getAll(){
@@ -117,6 +136,26 @@ public class ReservationBean {
         return placesList;
     }
     
+    public String getInfo(){
+        
+        Seance s = this.getSeance(seanceId);
+        String txt = "";
+        if(s != null){
+            txt = "Rezerwacja dla" + s.getMovie().getName()+", data: "+s.getSeanceDate("yyyy-MM-dd HH:mm");
+        }
+        
+        return txt;
+    }
+    
+    public Seance getSeance(Integer seance_id){
+        EntityManager em = DBManager.getManager().createEntityManager();
+        List<Seance> s = em.createNamedQuery("Seance.findById").setParameter("id", seanceId).getResultList();
+        Seance s2 = null;
+        if (!s.isEmpty())
+            s2 = s.get(0);
+        return s2;
+    }
+    
     public String create()
     {
         
@@ -126,19 +165,20 @@ public class ReservationBean {
         em.getTransaction().begin();
         try{
             reservation.setId(null);
-            reservation.setFirstName("asda");
-            reservation.setLastName("asdaasd");
-            reservation.setPhoneNumber("1235641");
+            //reservation.setFirstName("asda");
+            //reservation.setLastName("asdaasd");
+            //reservation.setPhoneNumber("1235641");
             reservation.setPlace(Integer.parseInt(placeNumber));
-            List<Seance> s = em.createNamedQuery("Seance.findById").setParameter("id", seanceId).getResultList();
+            /*List<Seance> s = em.createNamedQuery("Seance.findById").setParameter("id", seanceId).getResultList();
 
             System.out.print("Ilość elementów");
             System.out.println(s.size());
             Seance s2 = new Seance();
             if (!s.isEmpty())
-                s2 = s.get(0);
+                s2 = s.get(0);*/
+            Seance s = this.getSeance(seanceId);
 
-            reservation.setSeance(s2);
+            reservation.setSeance(s);
             System.out.print(placeNumber);
             em.persist(reservation);
             em.getTransaction().commit();    
