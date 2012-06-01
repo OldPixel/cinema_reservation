@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    template="./layout.xhtml"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:f="http://java.sun.com/jsf/core">
+
+        <ui:define name="content">
+            Dzisiejsze seanse:
+            <ui:repeat value="#{SeanceBean.todaySeanceMovies}" var="movie">
+                <p>#{movie.name}</p>
+                <ui:repeat value="#{movie.todaySeance}" var="sean">
+                    <ul>
+                        <li>
+                            <h:form>
+                                <h:commandButton value="#{sean.seanceDate}" actionListener="#{ReservationBean.setSeanceId}" action="reservations">
+                                    <f:attribute name="seance_id" value="#{sean.id.toString()}"></f:attribute>
+                                </h:commandButton>
+                            </h:form>
+
+                        </li>
+                    </ul>
+                </ui:repeat>
+            </ui:repeat>
+        </ui:define>
+
+    </ui:composition>

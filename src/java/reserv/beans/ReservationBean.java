@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import reserv.config.DBManager;
@@ -44,10 +45,14 @@ public class ReservationBean {
         return seanceId;
     }
 
-    public void setSeanceId(Integer seanceId) {
-        this.seanceId = seanceId;
-    }
     private Reservation reservation = new Reservation();
+    
+
+    public void setSeanceId(ActionEvent event) {
+        String seance_id = (String) event.getComponent().getAttributes().get("seance_id");
+        System.out.println(seance_id);
+        this.seanceId = Integer.parseInt(seance_id);
+    }
 
     public Reservation getReservation() {
         return reservation;
