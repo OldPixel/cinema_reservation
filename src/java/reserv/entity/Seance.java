@@ -5,6 +5,7 @@
 package reserv.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
@@ -21,6 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Seance.findAll", query = "SELECT s FROM Seance s"),
+    @NamedQuery(name = "Seance.findMovies", query = "SELECT s.movie FROM Seance s GROUP BY s.movie"),
     @NamedQuery(name = "Seance.findById", query = "SELECT s FROM Seance s WHERE s.id = :id"),
     @NamedQuery(name = "Seance.findBySeanceDate", query = "SELECT s FROM Seance s WHERE s.seanceDate = :seanceDate")})
 public class Seance implements Serializable {
@@ -57,8 +59,9 @@ public class Seance implements Serializable {
         this.id = id;
     }
 
-    public Date getSeanceDate() {
-        return seanceDate;
+    public String getSeanceDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        return formatter.format(seanceDate);
     }
 
     public void setSeanceDate(Date seanceDate) {

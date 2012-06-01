@@ -5,12 +5,16 @@
 package reserv.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import reserv.config.DBManager;
 
 /**
  *
@@ -22,7 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Movie.findAll", query = "SELECT m FROM Movie m"),
     @NamedQuery(name = "Movie.findById", query = "SELECT m FROM Movie m WHERE m.id = :id"),
-    @NamedQuery(name = "Movie.findByName", query = "SELECT m FROM Movie m WHERE m.name = :name")})
+    @NamedQuery(name = "Movie.findByName", query = "SELECT m FROM Movie m WHERE m.name = :name"),
+})
 public class Movie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,6 +71,25 @@ public class Movie implements Serializable {
 
     public void setSeanceSet(Set<Seance> seanceSet) {
         this.seanceSet = seanceSet;
+    }
+    
+    public List<Movie> getTodaySeance(){
+        
+        EntityManager em = DBManager.getManager().createEntityManager();
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String actual = formatter.format(now);
+        
+        String begin_actual = actual + " 00:00:00";
+        String end_actual = actual + " 23:59:59";
+        String sql = "SELECT s FROM Seance s WHERE s.seanceDate >= '"+begin_actual+"' "
+                + "AND s.seanceDate <= '"+end_actual+"'";
+        System.out.println(sql);
+        List<Movie> list = em
+                .createQuery(sql).getResultList();
+        
+        return list;
+        
     }
 
     @Override
