@@ -122,5 +122,20 @@
 }
 
 
+.place {
+    background-color: blue;
+    color: white;
+    height: 60px;
+    width: 64px;
+    float: left;
+}
 
-
+.place_reserved{
+    background-color: gray;
+    color: white;
+    min-height: 60px;
+    min-width: 64px;
+    height: 60px;
+    width: 64px;
+    float: left;  
+}

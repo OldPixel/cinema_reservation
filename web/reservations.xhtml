@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" /> 
+    </h:head>
+    <body>
+        <f:view>
+        <ui:composition template="./layout.xhtml">
+
+
+            <ui:define name="content">
+                
+                <ui:repeat value="#{ReservationBean.getSeancePlaces(1)}" var="p">                    
+                <h:form>
+
+                    
+                    <h:commandButton rendered="#{p.reservedPlace == false}" class="place" value="#{p.reservation.place}" actionListener="#{ReservationBean.setPlaceNumber}"
+                                    action="reservations">
+                        <f:attribute name="name" value="#{p.reservation.place.toString()}" />
+                    </h:commandButton>
+                    <h:commandButton rendered="#{p.reservedPlace == true}" class="place_reserved" value="#{p.reservation.place}" actionListener="#{ReservationBean.setPlaceNumber}"
+                                     disabled="false" action="reservations">      
+                        <f:attribute name="name" value="#{p.reservation.place.toString()}" />
+                    </h:commandButton>
+                    
+                
+                </h:form>
+                </ui:repeat>
+                
+            </ui:define>
+            
+
+        </ui:composition>
+    </f:view>
+    </body>
+</html>
