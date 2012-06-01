@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Reservation.findByFirstName", query = "SELECT r FROM Reservation r WHERE r.firstName = :firstName"),
     @NamedQuery(name = "Reservation.findByLastName", query = "SELECT r FROM Reservation r WHERE r.lastName = :lastName"),
     @NamedQuery(name = "Reservation.findByPhoneNumber", query = "SELECT r FROM Reservation r WHERE r.phoneNumber = :phoneNumber"),
+    @NamedQuery(name = "Reservation.findBySeanceId", query = "SELECT r FROM Reservation r WHERE r.seance.id = :seanceId"),
     @NamedQuery(name = "Reservation.findByPlace", query = "SELECT r FROM Reservation r WHERE r.place = :place")})
 public class Reservation implements Serializable {
     private static final long serialVersionUID = 1L;

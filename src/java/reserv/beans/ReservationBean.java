@@ -69,7 +69,7 @@ public class ReservationBean {
     
     public List<Reservation> getAll(){
         EntityManager em = DBManager.getManager().createEntityManager();
-        List<Reservation> list = em.createNamedQuery("Reservation.findAll").getResultList();
+        List<Reservation> list = em.createNamedQuery("Reservation.findBySeanceId").setParameter("seanceId", this.seanceId).getResultList();
         em.close();
         return list;
     }
@@ -85,7 +85,9 @@ public class ReservationBean {
         
     }
     
-    public List<Place> getSeancePlaces(Integer id){
+    public List<Place> getSeancePlaces(){
+        
+        
         List<Place> placesList = new ArrayList<Place>();
         List<Reservation> reservationList = this.getAll();
         List<Integer> placesReserved = new ArrayList<Integer>();
