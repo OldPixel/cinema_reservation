@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import reserv.config.DBManager;
-import reserv.entity.Movie;
 import reserv.entity.Reservation;
 import reserv.entity.Seance;
 import reserv.objects.Place;
@@ -32,6 +30,17 @@ public class ReservationBean {
 
     private String placeNumber;
     private Integer seanceId;
+    private Boolean isLogged;
+    
+   
+
+    public Boolean getIsLogged() {
+        return isLogged;
+    }
+
+    public void setIsLogged(Boolean isLogged) {
+        //
+    }
 
     public String getPlaceNumber() {
         return placeNumber;

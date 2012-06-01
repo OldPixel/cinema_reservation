@@ -130,6 +130,20 @@
     float: left;
 }
 
+#info{
+    
+}
+
+#info p{
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+    /*border:2px solid #BBDF8D; */
+    width: 100%;
+    padding: 4px;
+    margin-right: 20px;
+}
+
 .place_reserved{
     background-color: gray;
     color: white;
