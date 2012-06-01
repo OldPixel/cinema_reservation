@@ -22,12 +22,12 @@
 
                     
                     <h:commandButton rendered="#{p.reservedPlace == false}" class="place" value="#{p.reservation.place}" actionListener="#{ReservationBean.setPlaceNumber}"
-                                    action="reservations">
+                                     action="#{ReservationBean.create()}">
                         <f:attribute name="name" value="#{p.reservation.place.toString()}" />
                     </h:commandButton>
-                    <h:commandButton rendered="#{p.reservedPlace == true}" class="place_reserved" value="#{p.reservation.place}" actionListener="#{ReservationBean.setPlaceNumber}"
-                                     disabled="false" action="reservations">      
-                        <f:attribute name="name" value="#{p.reservation.place.toString()}" />
+                    <h:commandButton rendered="#{p.reservedPlace == true}" class="place_reserved" value="#{p.reservation.place}"
+                                     disabled="true" action="reservations">     
+                        
                     </h:commandButton>
                     
                 
