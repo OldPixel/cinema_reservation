@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
@@ -10,8 +11,64 @@
 
 
             <ui:define name="content">
-                <h:outputText value="#{AdminPanelBean.authorize()}"></h:outputText>
-                panel administracyjny                
+                <h:outputText value="#{AdminPanelBean.authorize()}"></h:outputText>                
+                <h:form prependId="false">
+                    <h3>Dodawanie nowego filmu.</h3>                    
+                    <table>
+                        <tr>
+                            <td>Tytuł: </td>
+                            <td><h:inputText id="title" value="#{MovieBean.name}" required="true" requiredMessage="Pole tytuł jest wymagane"  >
+                                    <f:validateLength minimum="2" maximum="50"></f:validateLength>
+                                    
+                                </h:inputText>
+                            </td>
+                        </tr>                        
+                        <tr>
+                            <td><h:commandButton action="#{MovieBean.addMovie()}" value="Dodaj film"></h:commandButton> </td>
+                        </tr>
+                    </table>
+                </h:form>
+                <h:form prependId="false">
+                    <h3>Dodawanie nowego seansu.</h3>                    
+                    <table>
+                        
+                        <tr>
+                            <th>Godzina:</th>
+                            <td>                         
+                                <h:selectOneMenu value="#{SeanceBean.hour}">
+                                    <f:selectItems value="#{SeanceBean.allHours()}" />
+                                </h:selectOneMenu>
+                             </td>                                                      
+                        </tr>    
+                        <tr>
+                            <th>Dzień:</th>
+                            <td>                             
+                                <h:selectOneMenu value="#{SeanceBean.day}">
+                                    <f:selectItems value="#{SeanceBean.allDays()}" />
+                                </h:selectOneMenu>
+                             </td>                                                      
+                        </tr> 
+                        <tr>
+                            <th>Miesiąc:</th>
+                            <td>                            
+                                <h:selectOneMenu value="#{SeanceBean.month}">
+                                    <f:selectItems value="#{SeanceBean.allMonths()}" />
+                                </h:selectOneMenu>
+                             </td>                                                      
+                        </tr> 
+                        <tr>
+                            <th>Film:</th>
+                            <td>                            
+                                <h:selectOneMenu value="#{SeanceBean.movie_name}">
+                                    <f:selectItems value="#{MovieBean.allMovies()}" />
+                                </h:selectOneMenu>
+                             </td>                                                      
+                        </tr> 
+                        <tr>
+                            <td><h:commandButton action="#{SeanceBean.addSeance()}" value="Dodaj seans"></h:commandButton> </td>
+                        </tr>
+                    </table>
+                </h:form>
             </ui:define>
 
         </ui:composition>

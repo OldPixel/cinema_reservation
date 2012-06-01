@@ -166,6 +166,7 @@ public class ReservationBean {
         try{
             reservation.setId(null);
 
+
             reservation.setPlace(Integer.parseInt(placeNumber));
             UUID token = UUID.randomUUID();
             reservation.setToken(token.toString());
