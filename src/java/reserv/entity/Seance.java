@@ -62,6 +62,11 @@ public class Seance implements Serializable {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         return formatter.format(seanceDate);
     }
+    
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(seanceDate);
+    }
 
     public String getSeanceDate(String format) {
         SimpleDateFormat formatter = new SimpleDateFormat(format);

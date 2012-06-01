@@ -37,6 +37,8 @@ public class ReservationBean {
     private Integer seanceId;
     
     public String checkStep(){
+        System.out.println("CO JEST?");
+        System.out.println(seanceId);
         if(seanceId <= 0){
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("seances.xhtml");
@@ -192,6 +194,10 @@ public class ReservationBean {
         return "orderSummary";
         
         
+    }
+    
+    public void reset(){
+        this.reservation = new Reservation();
     }
     
 }

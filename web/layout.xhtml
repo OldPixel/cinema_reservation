@@ -26,8 +26,8 @@
                 <div id="left">
                     <ui:insert name="left">Menu</ui:insert>
                     <ul>
-                        <li><h:outputLink value="faces/seances.xhtml">Dzisiejsze seanse</h:outputLink></li>
-                        <li><h:outputLink value="faces/login.xhtml">Panel administracyjny</h:outputLink></li>
+                        <li><h:outputLink value="seances.xhtml">Dzisiejsze seanse</h:outputLink></li>
+                        <li><h:outputLink value="login.xhtml">Panel administracyjny</h:outputLink></li>
                     </ul>
                     <h:form>
                         <h:commandButton value="Wyloguj" rendered="#{AdminPanelBean.getIsLogged() == true}"

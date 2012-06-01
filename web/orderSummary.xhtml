@@ -8,7 +8,17 @@
 
 
     <ui:define name="content">
-        hbcgfdgf
+        <h3>POTWIERDZENIE REZERWACJI</h3>
+        
+        <h4>TOKEN: <h:outputText value="${ReservationBean.reservation.token}"></h:outputText> </h4>
+        <p>(Zapamiętaj powyższy token. Będzie potrzebny do zrealizowania rezerwacji)</p>
+        <p>Dane rezerwacji:</p>
+        <p>Rezerwujący: <h:outputText value="${ReservationBean.reservation.lastName} ${ReservationBean.reservation.firstName}"></h:outputText> </p>
+        <p>Film: '<h:outputText value="${ReservationBean.reservation.seance.movie.name}"></h:outputText>' </p>
+        <p>Data seansu: <h:outputText value="${ReservationBean.reservation.seance.date}"></h:outputText></p>
+        <p>Godzina seansu: <h:outputText value="${ReservationBean.reservation.seance.seanceDate}"></h:outputText></p>
+        <p>Sala <h:outputText value="${ReservationBean.reservation.seance.cinemaAuditorium.name}"></h:outputText></p>
+        <h:outputText value="#{ReservationBean.reset()}"></h:outputText>
     </ui:define>
 
 </ui:composition>
