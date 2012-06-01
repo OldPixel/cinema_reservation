@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import reserv.config.DBManager;
 import reserv.entity.Movie;
 import reserv.entity.Seance;
+import reserv.objects.SeanceHelper;
 
 /**
  *
@@ -24,6 +25,43 @@ import reserv.entity.Seance;
 @ManagedBean(name="SeanceBean")
 @RequestScoped
 public class SeanceBean {
+    
+    private String hour;
+    private String day;
+    private String month;
+    private String movie_name;
+
+    public String getMovie_name() {
+        return movie_name;
+    }
+
+    public void setMovie_name(String movie_name) {
+        this.movie_name = movie_name;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
 
     private Seance seance = new Seance();
 
@@ -62,4 +100,24 @@ public class SeanceBean {
         em.close();
         return list;
     }
+    
+    public List<String> allHours()
+    {
+        return SeanceHelper.getHours();
+    }
+    public List<String> allDays()
+    {
+        return SeanceHelper.getDays();
+    }
+    public List<String> allMonths()
+    {
+        return SeanceHelper.getMonths();
+    }
+    
+    public String addSeance()
+    {
+        return "panel";
+    }
+    
+    
 }

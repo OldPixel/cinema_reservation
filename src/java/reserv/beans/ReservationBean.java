@@ -162,17 +162,8 @@ public class ReservationBean {
         em.getTransaction().begin();
         try{
             reservation.setId(null);
-            //reservation.setFirstName("asda");
-            //reservation.setLastName("asdaasd");
-            //reservation.setPhoneNumber("1235641");
             reservation.setPlace(Integer.parseInt(placeNumber));
-            /*List<Seance> s = em.createNamedQuery("Seance.findById").setParameter("id", seanceId).getResultList();
 
-            System.out.print("Ilość elementów");
-            System.out.println(s.size());
-            Seance s2 = new Seance();
-            if (!s.isEmpty())
-                s2 = s.get(0);*/
             Seance s = this.getSeance(seanceId);
 
             reservation.setSeance(s);
