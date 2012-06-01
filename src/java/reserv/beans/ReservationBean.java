@@ -7,6 +7,7 @@ package reserv.beans;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -162,17 +163,10 @@ public class ReservationBean {
         em.getTransaction().begin();
         try{
             reservation.setId(null);
-            //reservation.setFirstName("asda");
-            //reservation.setLastName("asdaasd");
-            //reservation.setPhoneNumber("1235641");
-            reservation.setPlace(Integer.parseInt(placeNumber));
-            /*List<Seance> s = em.createNamedQuery("Seance.findById").setParameter("id", seanceId).getResultList();
 
-            System.out.print("Ilość elementów");
-            System.out.println(s.size());
-            Seance s2 = new Seance();
-            if (!s.isEmpty())
-                s2 = s.get(0);*/
+            reservation.setPlace(Integer.parseInt(placeNumber));
+            UUID token = UUID.randomUUID();
+            reservation.setToken(token.toString());
             Seance s = this.getSeance(seanceId);
 
             reservation.setSeance(s);
@@ -181,22 +175,21 @@ public class ReservationBean {
             em.getTransaction().commit();    
             em.close();
 
-            this.reservation = new Reservation();
+            //this.reservation = new Reservation();
            
         }
-        catch(javax.validation.ConstraintViolationException e)
+        catch(Exception e)
         {
             System.out.println("WYJATEK !!!!!");
-            System.out.println(e.getConstraintViolations().toString());
+            //javax.validation.ConstraintViolationException e
+            //System.out.println(e.getConstraintViolations().toString());
+            return "seances";
             
         }
         
         
         
-        
-        
-        
-        return "reservations";
+        return "orderSummary";
         
         
     }

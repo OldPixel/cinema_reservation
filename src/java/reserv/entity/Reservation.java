@@ -24,8 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Reservation.findByLastName", query = "SELECT r FROM Reservation r WHERE r.lastName = :lastName"),
     @NamedQuery(name = "Reservation.findByPhoneNumber", query = "SELECT r FROM Reservation r WHERE r.phoneNumber = :phoneNumber"),
     @NamedQuery(name = "Reservation.findBySeanceId", query = "SELECT r FROM Reservation r WHERE r.seance.id = :seanceId"),
+    @NamedQuery(name = "Reservation.findByToken", query = "SELECT r FROM Reservation r WHERE r.token = :token"),
     @NamedQuery(name = "Reservation.findByPlace", query = "SELECT r FROM Reservation r WHERE r.place = :place")})
 public class Reservation implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "token", nullable = false, length = 255)
+    private String token;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -124,6 +130,14 @@ public class Reservation implements Serializable {
     @Override
     public String toString() {
         return "reserv.entity.Reservation[ id=" + id + " ]";
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
     
 }
