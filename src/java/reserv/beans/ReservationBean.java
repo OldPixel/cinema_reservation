@@ -36,12 +36,35 @@ public class ReservationBean {
     private String placeNumber;
     private Integer seanceId;
     
-    public String checkStep(){
+    public String checkStep(Integer step){
         System.out.println("CO JEST?");
         System.out.println(seanceId);
-        if(seanceId <= 0){
+        System.out.println(placeNumber);
+        
+        Boolean status = true;
+        String returning = "";
+        
+        if(step == 1){
+            System.out.println("step 1");
+            if(seanceId <= 0){
+                status = false;
+                returning = "seances.xhtml";
+            }
+        }
+        else if(step == 2){
+            System.out.println("step 2");
+            if(seanceId <= 0 || Integer.parseInt(placeNumber) < 0 ){
+                status = false;
+                returning = "reservations.xhtml";
+            }
+        }
+        
+        
+        
+        if(!status){
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("seances.xhtml");
+                System.out.println("REDIREXCT");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(returning);
             } catch (IOException ex) {
                 Logger.getLogger(ReservationBean.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -83,8 +106,7 @@ public class ReservationBean {
      * Creates a new instance of ReservationBeans
      */
     public ReservationBean() {
-        seanceId = -1;
-        placeNumber = "";
+        reset();
         
     }
     
@@ -197,8 +219,11 @@ public class ReservationBean {
         
     }
     
-    public void reset(){
+    public String reset(){
         this.reservation = new Reservation();
+        seanceId = -1;
+        placeNumber = "";
+        return "";
     }
     
 }

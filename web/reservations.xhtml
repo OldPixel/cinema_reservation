@@ -13,7 +13,7 @@
         <f:view>
         <ui:composition template="./layout.xhtml">
             <ui:define name="content">
-                 <h:outputText value="#{ReservationBean.checkStep()}"></h:outputText>
+                 <h:outputText value="#{ReservationBean.checkStep(1)}"></h:outputText>
                 <h:outputText value="#{ReservationBean.info}"></h:outputText>
                 <ui:repeat value="#{ReservationBean.getSeancePlaces()}" var="p">                    
                 <h:form> 
