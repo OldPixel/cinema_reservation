@@ -27,9 +27,19 @@
                     <ui:insert name="left">Menu</ui:insert>
                     <ul>
                         <li><h:outputLink value="faces/seances.xhtml">Dzisiejsze seanse</h:outputLink></li>
+                        <li><h:outputLink value="faces/login.xhtml">Panel administracyjny</h:outputLink></li>
                     </ul>
+                    <h:form>
+                        <h:commandButton value="Wyloguj" rendered="#{AdminPanelBean.getIsLogged() == true}"
+                                         action="#{AdminPanelBean.logout()}">
+                            
+                        </h:commandButton>
+                    </h:form>
                 </div>
                 <div id="content" class="left_content">
+                    <div id="info">
+                        <h:messages errorStyle="color:red" infoStyle="color:green" layout="table" />  
+                    </div>
                     <ui:insert name="content">Content</ui:insert>
                 </div>
             </div>

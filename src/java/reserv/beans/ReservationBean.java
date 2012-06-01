@@ -11,12 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import reserv.config.DBManager;
-import reserv.entity.Movie;
 import reserv.entity.Reservation;
 import reserv.entity.Seance;
 import reserv.objects.Place;
@@ -47,7 +45,6 @@ public class ReservationBean {
         }
         return "";
     }
-    
 
     public String getPlaceNumber() {
         return placeNumber;
