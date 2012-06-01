@@ -83,7 +83,7 @@ public class Movie implements Serializable {
         String begin_actual = actual + " 00:00:00";
         String end_actual = actual + " 23:59:59";
         String sql = "SELECT s FROM Seance s WHERE s.seanceDate >= '"+begin_actual+"' "
-                + "AND s.seanceDate <= '"+end_actual+"'";
+                + "AND s.seanceDate <= '"+end_actual+"' AND s.movie.id = "+this.id;
         System.out.println(sql);
         List<Movie> list = em
                 .createQuery(sql).getResultList();
