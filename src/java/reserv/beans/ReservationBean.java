@@ -11,7 +11,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
-import org.hibernate.exception.ConstraintViolationException;
 import reserv.config.DBManager;
 import reserv.entity.Movie;
 import reserv.entity.Reservation;
