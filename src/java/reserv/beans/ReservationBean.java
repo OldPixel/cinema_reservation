@@ -37,9 +37,6 @@ public class ReservationBean {
     private Integer seanceId;
     
     public String checkStep(Integer step){
-        System.out.println("CO JEST?");
-        System.out.println(seanceId);
-        System.out.println(placeNumber);
         
         Boolean status = true;
         String returning = "";
