@@ -82,9 +82,14 @@ public class SeanceBean {
     public List<Movie> getTodaySeanceMovies()
     {
         EntityManager em = DBManager.getManager().createEntityManager();
+        java.util.Date now = new java.util.Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String actual = formatter.format(now);
         
-        List list = em.createNamedQuery("Seance.findMovies").getResultList();
-        
+        String begin_actual = actual + " 00:00:00";
+        String end_actual = actual + " 23:59:59";
+        List list = em.createQuery("SELECT s.movie FROM Seance s WHERE s.seanceDate >= '"+begin_actual+"' "
+                + "AND s.seanceDate <= '"+end_actual+"' GROUP BY s.movie").getResultList();
 //        Movie test = (Movie) list.get(0);
 //        
 //        System.err.println(test.getName());
