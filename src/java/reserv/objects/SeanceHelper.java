@@ -17,7 +17,7 @@ public class SeanceHelper {
     public static List<String> getHours()
     {
         List<String> hours = new ArrayList<String>();
-        hours.add("7:10");
+        hours.add("07:10");
         hours.add("10:00");
         hours.add("13:20");
         hours.add("16:00");
