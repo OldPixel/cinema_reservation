@@ -8,10 +8,19 @@
                     xmlns:f="http://java.sun.com/jsf/core">
 
         <ui:define name="content">
+            <h:form>
+                <h:inputText id="seanceDate" value="#{SeanceBean.seanceDate}" ></h:inputText>
+                <h:commandButton action="#{SeanceBean.change()}" value="Zobacz" ></h:commandButton> 
+            </h:form>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                   $('input').datepicker({ dateFormat: "yy-mm-dd" });
+                });
+            </script>
             Dzisiejsze seanse:
             <ui:repeat value="#{SeanceBean.todaySeanceMovies}" var="movie">
                 <p>#{movie.name}</p>
-                <ui:repeat value="#{movie.todaySeance}" var="sean">
+                <ui:repeat value="#{movie.getTodaySeance(SeanceBean.seanceDate)}" var="sean">
                     <ul>
                         <li>
                             <h:form>
@@ -19,7 +28,7 @@
                                     <f:attribute name="seance_id" value="#{sean.id.toString()}"></f:attribute>
                                 </h:commandButton>
                             </h:form>
-
+                            #{sean.id.toString()}
                         </li>
                     </ul>
                 </ui:repeat>

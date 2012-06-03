@@ -8,6 +8,7 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -30,6 +31,17 @@ public class SeanceBean {
     private String day;
     private String month;
     private String movie_name;
+    private String seanceDate;
+    
+    public static Integer test = 0;
+
+    public String getSeanceDate() {
+        return seanceDate;
+    }
+
+    public void setSeanceDate(String seanceDate) {
+        this.seanceDate = seanceDate;
+    }
 
     public String getMovie_name() {
         return movie_name;
@@ -78,18 +90,34 @@ public class SeanceBean {
      */
     public SeanceBean() {
     }
-    
+      
     public List<Movie> getTodaySeanceMovies()
     {
         EntityManager em = DBManager.getManager().createEntityManager();
+        
+        System.out.println(test);
+        System.out.println("seanceDate");
+        System.out.println(seanceDate);
+        test += 1;
         java.util.Date now = new java.util.Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String actual = formatter.format(now);
+        System.out.println(actual);
+        if(seanceDate == null){
+            seanceDate = actual;
+        }
         
-        String begin_actual = actual + " 00:00:00";
-        String end_actual = actual + " 23:59:59";
-        List list = em.createQuery("SELECT s.movie FROM Seance s WHERE s.seanceDate >= '"+begin_actual+"' "
-                + "AND s.seanceDate <= '"+end_actual+"' GROUP BY s.movie").getResultList();
+        System.out.println(actual);
+        
+        String begin_actual = seanceDate + " 00:00:00";
+        String end_actual = seanceDate + " 23:59:59";
+        String sql = "SELECT s.movie FROM Seance s WHERE s.seanceDate >= '"+begin_actual+"' "
+                + "AND s.seanceDate <= '"+end_actual+"' GROUP BY s.movie";
+        System.out.println(sql);
+        List list = em.createQuery(sql).getResultList();
+
+        
+        
 //        Movie test = (Movie) list.get(0);
 //        
 //        System.err.println(test.getName());
@@ -122,6 +150,12 @@ public class SeanceBean {
     public String addSeance()
     {
         return "panel";
+    }
+    
+    public String change(){
+        System.out.println("change");
+        System.out.println(seanceDate);
+        return "seances";
     }
     
     

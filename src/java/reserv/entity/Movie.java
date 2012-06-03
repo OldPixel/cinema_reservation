@@ -72,18 +72,22 @@ public class Movie implements Serializable {
         this.seanceSet = seanceSet;
     }
     
-    public List<Movie> getTodaySeance(){
+    public List<Movie> getTodaySeance(String seanceDate){
         
         EntityManager em = DBManager.getManager().createEntityManager();
-        Date now = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String actual = formatter.format(now);
+//        Date now = new Date();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        String actual = formatter.format(now);
+        String actual = seanceDate;
+        //System.out.println("******");
+        //System.out.println(seanceDate);
+        //System.out.println("******");
         
         String begin_actual = actual + " 00:00:00";
         String end_actual = actual + " 23:59:59";
         String sql = "SELECT s FROM Seance s WHERE s.seanceDate >= '"+begin_actual+"' "
                 + "AND s.seanceDate <= '"+end_actual+"' AND s.movie.id = "+this.id;
-        System.out.println(sql);
+        //System.out.println(sql);
         List<Movie> list = em
                 .createQuery(sql).getResultList();
         
