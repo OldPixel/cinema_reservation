@@ -17,18 +17,17 @@
                    $('input').datepicker({ dateFormat: "yy-mm-dd" });
                 });
             </script>
-            Dzisiejsze seanse:
+            Seanse z dnia #{SeanceBean.seanceDate}
             <ui:repeat value="#{SeanceBean.todaySeanceMovies}" var="movie">
                 <p>#{movie.name}</p>
                 <ui:repeat value="#{movie.getTodaySeance(SeanceBean.seanceDate)}" var="sean">
                     <ul>
                         <li>
                             <h:form>
-                                <h:commandButton value="#{sean.seanceDate}" actionListener="#{ReservationBean.seanceId}" action="reservations.xhtml">
-                                    <f:attribute name="seance_id" value="#{sean.id.toString()}"></f:attribute>
+                                <h:commandButton value="#{sean.seanceDate}" actionListener="#{ReservationBean.setSeanceId}" action="reservations">
+                                    <f:attribute name="seanceId" value="#{sean.id.toString()}"></f:attribute>
                                 </h:commandButton>
                             </h:form>
-                            #{sean.id.toString()}
                         </li>
                     </ul>
                 </ui:repeat>

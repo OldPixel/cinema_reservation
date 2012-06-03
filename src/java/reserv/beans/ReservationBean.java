@@ -85,11 +85,9 @@ public class ReservationBean {
 
     private Reservation reservation = new Reservation();
     
-
+    
     public void setSeanceId(ActionEvent event) {
-        String seance_id = (String) event.getComponent().getAttributes().get("seance_id");
-        System.out.println("SEANCE ID");
-        System.out.println(seance_id);
+        String seance_id = (String) event.getComponent().getAttributes().get("seanceId");
         this.seanceId = Integer.parseInt(seance_id);
     }
 
