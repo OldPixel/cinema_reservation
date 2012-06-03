@@ -83,7 +83,7 @@ public class MovieBean {
         return list;
     }
     
-    public List<SelectItem> allMovies()
+    public List<SelectItem> getMoviesList()
     {
         List<SelectItem> movies = new ArrayList<SelectItem>();
         

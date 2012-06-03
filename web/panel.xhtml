@@ -59,8 +59,19 @@
                         <tr>
                             <th>Film:</th>
                             <td>                            
-                                <h:selectOneMenu value="#{SeanceBean.movie_name}">
-                                    <f:selectItems value="#{MovieBean.allMovies()}" />
+                                <h:selectOneMenu value="#{SeanceBean.seance.movie}">
+                                    <f:converter converterId="movieConverter" />
+                                    <f:selectItems value="#{MovieBean.getMovies()}" />
+                                </h:selectOneMenu>
+                             </td>                                                      
+                        </tr> 
+                        <tr>
+                            <th>Sala kinowa:</th>
+                            <td>                         
+                                
+                                <h:selectOneMenu value="#{SeanceBean.seance.cinemaAuditorium}">
+                                    <f:converter converterId="cinemaAuditoriumConverter" />
+                                    <f:selectItems value="#{CinemaAuditoriumBean.getCinemaAuditoriums()}" />
                                 </h:selectOneMenu>
                              </td>                                                      
                         </tr> 

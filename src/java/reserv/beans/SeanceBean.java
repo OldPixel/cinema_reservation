@@ -4,12 +4,8 @@
  */
 package reserv.beans;
 
-import java.sql.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -17,6 +13,7 @@ import javax.persistence.EntityManager;
 import reserv.config.DBManager;
 import reserv.entity.Movie;
 import reserv.entity.Seance;
+import reserv.objects.PixTomMessages;
 import reserv.objects.SeanceHelper;
 
 /**
@@ -32,6 +29,7 @@ public class SeanceBean {
     private String month;
     private String movie_name;
     private String seanceDate;
+    private Seance seance = new Seance();
     
     public static Integer test = 0;
 
@@ -75,7 +73,6 @@ public class SeanceBean {
         this.month = month;
     }
 
-    private Seance seance = new Seance();
 
     public Seance getSeance() {
         return seance;
@@ -149,6 +146,40 @@ public class SeanceBean {
     
     public String addSeance()
     {
+        EntityManager em = DBManager.getManager().createEntityManager();
+        em.getTransaction().begin();
+        try{
+            seance.setId(null);
+            Integer hrs = Integer.parseInt(hour.substring(0, 2));
+            Integer min = Integer.parseInt(hour.substring(3, 5));
+            
+            System.out.println("Miesiąc: " + month);
+            System.out.println("Dzień: " + day);
+            System.out.println("Godzina: " + hrs.toString());
+            System.out.println("Minuta: " + min.toString());
+            
+            Calendar c = Calendar.getInstance();
+            c.set(2012, Integer.parseInt(month) -1, Integer.parseInt(day), hrs, min,0);            
+            java.util.Date dt = c.getTime();
+
+            seance.setSeanceDate(dt);
+                      
+            em.persist(seance);
+            em.getTransaction().commit();    
+            em.close();
+
+            this.seance = new Seance();
+            PixTomMessages.addFlash("Seans został dodany pomyślnie.");
+            
+           
+        }
+        catch(javax.validation.ConstraintViolationException e)
+        {
+            System.out.println("WYJATEK !!!!!");
+            System.out.println(e.getConstraintViolations().toString());
+            
+        }
+
         return "panel";
     }
     

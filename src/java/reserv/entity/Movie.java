@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -117,7 +116,7 @@ public class Movie implements Serializable {
 
     @Override
     public String toString() {
-        return "reserv.entity.Movie[ id=" + id + " ]";
+        return name;
     }
     
 }
