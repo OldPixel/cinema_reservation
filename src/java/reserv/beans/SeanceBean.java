@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import reserv.config.DBManager;
 import reserv.entity.Movie;
@@ -21,7 +22,7 @@ import reserv.objects.SeanceHelper;
  * @author muody
  */
 @ManagedBean(name="SeanceBean")
-@RequestScoped
+@SessionScoped
 public class SeanceBean {
     
     private String hour;
@@ -34,7 +35,15 @@ public class SeanceBean {
     public static Integer test = 0;
 
     public String getSeanceDate() {
-        return seanceDate;
+        if(seanceDate == null){
+            java.util.Date now = new java.util.Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String actual = formatter.format(now);
+            return actual;
+        }else{
+           return seanceDate; 
+        }
+        
     }
 
     public void setSeanceDate(String seanceDate) {
